@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "AntiSpoil",
+    "description": "Proividing it with a list of literature, TV, Films that whose spoilers you want to keep away",
+    "version": "1.0.0",
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["content.js"]
+        }
+    ],
+    "browser_action": {
+        "default_icon": {
+        },
+        "default_title": "AntiSpoil",
+        "default_popup": "popup/index.html"
+    },
+    "permissions": [
+        "storage"
+    ]
+}
