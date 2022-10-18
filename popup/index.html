@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="stylesheet.css">
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <h1>AntiSpoil</h1>
+        <div class="form-field">
+            <label for="toggle-enabled">
+                <input id="toggle-enabled" name="toggle-enabled" type="checkbox"><span>Enabled</span>
+            </label>
+            <br>
+            <label for="add-banned-text">Type word or phrase:</label>
+            <br>
+            <input id="add-banned-text" name="add-banned-text" type="text">
+            <input id="add-banned-button" name="add-banned-button" type="button" value="Add">
+        </div>
+        <div>
+            <h3>Blocked phrases</h3>
+            <div id="blocked-phrases">
+
+            </div>
+        </div>
+    </body>
+</html>
