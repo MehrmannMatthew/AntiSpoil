@@ -7,3 +7,40 @@ html, body {
 h1 {
     text-align: center;
 }
+
+#banned-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.banned-item-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.banned-phrase-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.banned-phrase-container .banned-remove-button, .banned-phrase, .banned-expansion-button {
+    display: flex;
+
+
+}
+
+.banned-remove-button {
+
+}
+
+.banned-phrase {
+
+}
+
+.banned-expansion-button {
+
+}
+
+.banned-related-list-container {
+
+}
