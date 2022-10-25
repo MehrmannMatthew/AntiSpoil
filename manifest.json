@@ -11,10 +11,18 @@
     ],
     "action": {
         "default_icon": {
+            "16": "Extension Icons/favicon-16x16.png",
+            "32": "Extension Icons/favicon-32x32.png"
         },
         "default_title": "AntiSpoil",
         "default_popup": "popup/index.html"
     },
+    "icons": {
+        "16": "Extension Icons/favicon-16x16.png",
+        "32": "Extension Icons/favicon-32x32.png",
+        "48": "Extension Icons/spoil48x48.png",
+        "128": "Extension Icons/spoil128x128.png"
+        },
     "permissions": [
         "storage"
     ]
