@@ -46,12 +46,20 @@ class Store {
 const store = new Store();
 
 window.onload = () => {
-    $('#add-banned-button', 0).addEventListener('click', () => {
+    const inputButton = () => {
         const input = $('#add-banned-text', 0);
         const { value } = input;
         if(value.length !== 0) {
             store.addPhrase(value);
             input.value = '';
         }
-    });
-};
+    };
+
+    $('#add-banned-button', 0).addEventListener('click', inputButton);
+    $('#add-banned-text', 0).addEventListener('keydown', e => {
+        if(e.key == "Enter")
+        {
+            inputButton();
+        }       
+});
+}
