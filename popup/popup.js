@@ -3,13 +3,11 @@ function $(a, b) {
 }
 
 function createElement(parent, elementType, attributes, innerText) {
-    console.log(elementType, attributes);
     const element = document.createElement(elementType);
     if(parent) {
         parent.appendChild(element);
     }
     for(const key in attributes) {
-        console.log(key);
         element.setAttribute(key, attributes[key]);
     }
     if(innerText) {
@@ -46,6 +44,9 @@ class Store {
         bannedListContainer.innerHTML = '';
         for(let i = 0; i < this.banned.length; ++i) {
             const { keyPhrase, relatedPhrases } = this.banned[i];
+            
+            const expansionId = `banned-related-container-${i}`;
+            
             const itemContainer = createElement(bannedListContainer, 'div', { id: `banned-item-container-${i}`, class: 'banned-item-container' });
 
             const keyPhraseContainer = createElement(itemContainer, 'div', { class: 'banned-phrase-container' });
@@ -54,11 +55,24 @@ class Store {
             });
             createElement(keyPhraseContainer, 'div', { class: 'banned-phrase' }, keyPhrase);
             createElement(keyPhraseContainer, 'div', { class: 'banned-expansion-button' }, 'expand').addEventListener('click', () => {
-                // expand
+                const { classList } = $(`#${expansionId}`, 0);
+                if(classList.contains('expansion-panel-hidden')) {
+                  classList.remove('expansion-panel-hidden');
+                }
+                else {
+                  classList.add('expansion-panel-hidden');
+                }
             });
 
-            const relatedListContainer = createElement(itemContainer, 'div', { id: `banned-related-container-${i}`, class: 'banned-item-container' });
-            console.log(relatedPhrases);
+            const expansionPanel = createElement(itemContainer, 'div', { id: expansionId, class: 'expansion-panel expansion-panel-hidden' });
+            const expansionHeader = createElement(expansionPanel, 'div', { class: 'expansion-panel-header' });
+            createElement(expansionHeader, 'div', { class: 'expansion-panel-header-title' }, 'Block Related Words');
+            // expansion header toggle
+            createElement(expansionHeader, 'div', { class: 'toggle' });
+            
+            
+            
+            const relatedListContainer = createElement(expansionPanel, 'div', { class: 'banned-item-container' });
             relatedPhrases.forEach((phrase, relatedIndex) => {
                 const relatedItemContainer = createElement(relatedListContainer, 'div', { class: 'banned-phrase-container' });
                 createElement(relatedItemContainer, 'div', { class: 'banned-remove-button' }, 'delete').addEventListener('click', () => {
@@ -85,7 +99,7 @@ class Phrase {
 
 window.onload = () => {
     const inputButton = () => {
-        const input = $('#add-banned-text', 0);
+        const input = $('#add-phrase', 0);
         const { value } = input;
         if(value.length !== 0) {
             store.addPhrase(value);
@@ -93,13 +107,9 @@ window.onload = () => {
         }
     };
 
-    $('#add-banned-button', 0).addEventListener('click', inputButton);
-    $('#add-banned-text', 0).addEventListener('keydown', e => {
-        if(e.key == "Enter")
-        {
+    $('#add-phrase', 0).addEventListener('keydown', e => {
+        if(e.key == 'Enter') {
             inputButton();
-        }       
+        }
 });
 }
-
-
