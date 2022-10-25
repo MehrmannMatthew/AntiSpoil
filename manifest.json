@@ -23,6 +23,10 @@
         "48": "Icons/spoil48x48.png",
         "128": "Icons/spoil128x128.png"
         },
+    "background": {
+            "service_worker": "background.js"   
+        },
+
     "permissions": [
         "storage"
     ]
