@@ -1,16 +1,13 @@
 # AntiSpoil
 EECS 448 Project Repo for AntiSpoil Extension
 
-How to run the extension:
+## Overview
+<a name="installation"></a>
 
-* download the zip of this project code
-
-* extract the zip 
-
-* navigate to `chrome://extensions`
-
-* enable developer mode
-
-* click load unpacked
-
-* select the extracted root folder of this project
+### Installation
+1. Download the zip of this project code
+2. Extract the zip 
+3. Navigate to `chrome://extensions`
+4. Enable developer mode
+5. Click load unpacked
+6. Select the extracted root folder of this project
