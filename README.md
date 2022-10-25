@@ -6,6 +6,7 @@ EECS 448 Project Repo for AntiSpoil Extension
 1. [Installation](#installation)
 2. [Documentation](#documentation)
 3. [Team Members](#team-members)
+*** 
 
 ### Installation
 1. Download the zip of this project code
