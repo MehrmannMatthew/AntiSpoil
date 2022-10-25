@@ -16,6 +16,27 @@ function createElement(parent, elementType, attributes, innerText) {
     return element;
 }
 
+class MessageSystem {
+  constructor() {
+    this.handlers = {};
+    chrome.runtime.onMessage.addListener(({ signature, body }, sender) => {
+      const handler = this.handlers[signature];
+      if(handler) {
+        handler(body);
+      }
+    });
+  }
+  addHandler(signature, handler) {
+    this.handlers[signature] = handler;
+  }
+  send(signature, body) {
+    chrome.runtime.sendMessage({
+      signature,
+      body
+    });
+  }
+}
+
 class Store {
     constructor() {
         this.banned = null;
@@ -84,8 +105,6 @@ class Store {
     }
 }
 
-const store = new Store();
-
 class Phrase {
     constructor(keyPhrase) {
         this.keyPhrase = keyPhrase;
@@ -96,6 +115,9 @@ class Phrase {
         ];
     }
 }
+
+const messageSystem = new MessageSystem();
+const store = new Store();
 
 window.onload = () => {
     const inputButton = () => {
@@ -111,5 +133,5 @@ window.onload = () => {
         if(e.key == 'Enter') {
             inputButton();
         }
-});
-}
+    });
+};
