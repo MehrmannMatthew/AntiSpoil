@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "AntiSpoil",
-    "description": "Proividing it with a list of literature, TV, Films that whose spoilers you want to keep away",
+    "description": "Blocks potential spoiler for Movies, TV Shows, and other media",
     "version": "1.0.0",
     "content_scripts": [
         {
