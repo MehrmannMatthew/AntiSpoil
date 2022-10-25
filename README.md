@@ -14,3 +14,14 @@ EECS 448 Project Repo for AntiSpoil Extension
 4. Enable developer mode
 5. Click load unpacked
 6. Select the extracted root folder of this project
+
+### Documentation
+
+
+### Team Members
+* Eric Kuebler
+* Kieran Delaney
+* Kevin Likcani
+* Matthew Mehrmann
+* Nicholas Nguyen
+* Paul Stuever
