@@ -26,6 +26,7 @@ EECS 448 Project Repo for AntiSpoil Extension
 * [Supplementary Specifications](https://docs.google.com/document/d/1J6KFFeSvlqnmXwg7vRfxll0KXZeSsHed/edit?usp=sharing&ouid=113790454319257906381&rtpof=true&sd=true)
 * [Use-Case Realization](https://docs.google.com/document/d/1KubwuC54D13ZH-W6aORHc87emASkRSpv/edit?usp=sharing&ouid=113790454319257906381&rtpof=true&sd=true)
 * [Software Architecture](https://docs.google.com/document/d/1tIr5GoNbSmOJjkxGFNHhiPPE2Y9tkpZs/edit?usp=sharing&ouid=113790454319257906381&rtpof=true&sd=true)
+* [Meeting Logs](https://docs.google.com/document/d/1wA3ZzG0Fo3xpZ_FWHNn15B0ehL_J_z7AdZxFRHk3UL0/edit?usp=sharing)
 ***
 ### Team Members
 * Eric Kuebler
