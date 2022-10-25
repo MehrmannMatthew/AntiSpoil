@@ -1,6 +1,6 @@
 # AntiSpoil
 EECS 448 Project Repo for AntiSpoil Extension
-
+***
 ## Overview
 <a name="installation">Installation</a>
 
