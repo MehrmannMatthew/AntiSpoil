@@ -6,19 +6,23 @@
         <script src="popup.js"></script>
     </head>
     <body>
-        <h1>AntiSpoil</h1>
-        <div class="form-field">
-            <label for="toggle-enabled">
-                <input id="toggle-enabled" name="toggle-enabled" type="checkbox"><span>Enabled</span>
+        <div id="header">
+          <h1>AntiSpoil</h1>
+          <div id="enable-toggle-container">
+            <label class="toggle">
+              <input id="enable" type="checkbox">
+              <span class="toggle-slider"></span>
             </label>
-            <br>
-            <label for="add-banned-text">Type word or phrase:</label>
-            <br>
-            <input id="add-banned-text" name="add-banned-text" type="text">
-            <input id="add-banned-button" name="add-banned-button" type="button" value="Add">
+          </div>
         </div>
-        <div>
+        <div id="main">
             <h3>Blocked phrases</h3>
+            <div id="search-container">
+              <input id="search-phrase" name="search-phrase" placeholder="Search" type="text">
+            </div>
+            <div id="add-phrase-container">
+              <input id="add-phrase" name="add-phrase" placeholder="Add Phrase" type="text">
+            </div>
             <div id="banned-list-container">
                 
             </div>
