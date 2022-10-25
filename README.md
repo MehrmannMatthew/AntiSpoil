@@ -1,4 +1,4 @@
-# AntiSpoil
+# AntiSpoil ![AntiSpoil logo](Extension Icons/spoil128x128.png)
 ***
 EECS 448 Project Repo for AntiSpoil Extension
 
