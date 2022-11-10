@@ -1,29 +1,11 @@
-class MessageSystem {
-  constructor() {
-    this.handlers = {};
-    chrome.runtime.onMessage.addListener(({ signature, body }, sender) => {
-      const handler = this.handlers[signature];
-      if(handler) {
-        handler(body);
-      }
-    });
-  }
-  addHandler(signature, handler) {
-    this.handlers[signature] = handler;
-  }
-  send(signature, body) {
-    chrome.runtime.sendMessage({
-      signature,
-      body
-    });
-  }
-}
+//import MessageSystem from './components/message-system.js';
+//import EnglishDictionary from './english-dictionary.js';
 
-const messageSystem = new MessageSystem();
+// const messageSystem = new MessageSystem();
 
-messageSystem.addHandler('test', body => {
-  console.log('received', body);
-});
+//messageSystem.addHandler('test', body => {
+//  console.log('received', body);
+//});
 
 async function wikipediaAPI(params) {
   /*
@@ -85,7 +67,7 @@ async function wikipediaQuery(searchQuery) {
       }
       else if(wordIndex === -1) { // if not currently parsing a word
         wordIndex = j;
-      }      
+      }
     }
   }
   console.log(dictionary);

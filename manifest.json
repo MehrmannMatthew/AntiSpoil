@@ -24,7 +24,8 @@
         "128": "Icons/spoil128x128.png"
         },
     "background": {
-            "service_worker": "background.js"   
+            "service_worker": "background.js",
+            "type": "module"
         },
 
     "permissions": [
