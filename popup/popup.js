@@ -96,6 +96,8 @@ window.onload = async () => {
         }
     });
 
+    $('#enable', 0).addEventListener("click", toggleOn);
+
     update();
 
     const toggleEnabled = $('#enable', 0);
