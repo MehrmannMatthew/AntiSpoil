@@ -6,6 +6,20 @@ const messageSystem = new MessageSystem();
 
 messageSystem.addHandler('update-ui', update);
 
+function toggleOn(){
+    //const status = storage.toggleStorage...(something);
+    const toggle = document.getElementById('enable');
+    if(toggle.checked){
+        //assuming something like this to get it persistent:
+        //storage.toggleStorage(toggle).then(update);
+        chrome.action.setIcon({path: "../Icons/favicon-on-16x16.png"});
+        //also do stuff to block spoilers if it's 
+    }
+    else{
+        chrome.action.setIcon({path: "../Icons/favicon-16x16.png"});
+    }
+}
+
 function $(a, b) {
     return typeof b === 'number' ? document.querySelectorAll(a)[b] : document.querySelectorAll(a);
 }
@@ -29,6 +43,13 @@ async function update() {
     const { phrases } = storage;
     const bannedListContainer = $('#banned-list-container', 0);
     bannedListContainer.innerHTML = '';
+
+    //check toggle
+    /*we'll see what this ends up being*/ 
+    //const toggle = document.getElementById("enable");
+    //var enabled = storage.getSetting()
+    toggleOn();
+
     for(let i = 0; i < phrases.length; ++i) {
         const { keyPhrase, relatedPhrases } = phrases[i];
         
@@ -86,6 +107,8 @@ window.onload = () => {
             inputButton();
         }
     });
+
+    $('#enable', 0).addEventListener("click", toggleOn);
 
     update();
 };
