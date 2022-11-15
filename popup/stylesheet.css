@@ -178,24 +178,11 @@ h1 {
   transform: rotate(45deg);
 }
 
-@keyframes expansion-panel-open {
-  0% {
-    display: block;
-    height: 0px;
-  }
-  100% {
-    height: 100px;
-  }
-}
-
 .expansion-panel {
   background-color: #efefef;
   padding: 10px;
   border-radius: 10px;
   overflow: hidden;
-  transition: height 300ms ease-in-out;
-  animation: expansion-panel-open 100ms linear;
-
 }
 
 .expansion-panel-hidden .expansion-panel {
