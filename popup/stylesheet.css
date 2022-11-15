@@ -153,6 +153,7 @@ h1 {
   background-color: #C8C8C8;
   -webkit-transition: 400ms;
   transition: 400ms;
+  border-radius: 20px;
 }
 .toggle-slider:before {
   position: absolute;
@@ -164,6 +165,7 @@ h1 {
   background-color: #ffffff;
   -webkit-transition: 400ms;
   transition: 400ms;
+  border-radius: 20px;
 }
 
 .toggle input:checked + .toggle-slider {
