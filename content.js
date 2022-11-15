@@ -4,9 +4,9 @@ function replace() {
 
     const spoiler = "<h1 style=\"color:#FF0000\">[SPOILER]</h1>";
 
-    chrome.storage.local.get(['banned'], ({ banned }) => {
-
-        const modifiedBanned = banned.map(phrase => phrase.toLowerCase().trim());
+    chrome.storage.local.get(['phrases'], ({ phrases }) => {
+        console.log(phrases);
+        const modifiedBanned = phrases.map(phrase => phrase.toLowerCase().trim());
         
         tags.forEach(tag => {
             const currentTag = document.getElementsByTagName(tag);
