@@ -46,6 +46,13 @@
     "text-": 1,
     "ewopening": 1,
     "uproxxlocations": 1,
+    "en-us": 1,
+    "accessdate": 1,
+    "data-sort-value": 1,
+    "rowheader": 1,
+    "hlist": 1,
+    "-last": 1,
+
 
     "// blacklisted things that incorrectly show up a lot": 0,
 
@@ -153,6 +160,12 @@
     "pbs": 1,
     "movieweb": 1,
     "newslibrary": 1,
+    "bomweekly": 1,
+    "re-release": 1,
+    "highest-grossing": 1,
+    "nymarkusmcfeely": 1,
+    "vanityfairmarkusmcfeely": 1,
+    "screen rant": 1,
 
     "// blacklisted random nonsense": 0,
 

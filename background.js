@@ -1,9 +1,12 @@
 import MessageSystem from './components/message-system.js';
+import Storage from './components/storage.js';
 
 const messageSystem = new MessageSystem();
+const storage = new Storage();
 
-messageSystem.addHandler('test', body => {
-  console.log('received', body);
+messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
+  const relatedPhrases = await wikipediaQuery(keyPhrase);
+  storage.add(keyPhrase, relatedPhrases);
 });
 
 async function safeFetch(url) {
@@ -40,7 +43,7 @@ async function wikipediaQuery(searchQuery) {
   console.time('time test');
   // settings
   const maxWikipediaPages = 3;
-  const relatedWordCount = 30;
+  const relatedWordCount = 10;
 
   // get black lists
   const englishBlacklist = await safeFetch(chrome.runtime.getURL('/dictionary/words-dictionary.json'));
@@ -77,11 +80,11 @@ async function wikipediaQuery(searchQuery) {
       const char = content[charIndex];
       if(acceptedChars.indexOf(char) === -1) { // if char is not an alphabetical character
         if(wordIndex !== -1) { // if currently parsing a word
-          let phrase = content.slice(wordIndex, charIndex).replaceAll('\'', '').trim();
+          const phrase = content.slice(wordIndex, charIndex).replaceAll('\'', '').trim();
 
           // filter words and phrases based on length, wikipedia formatting blacklist, and english words
           const wordsAndPhrases = phrase.split(' ');
-          if(wordsAndPhrases.length !== 0) {
+          if(wordsAndPhrases.length !== 1) {
             wordsAndPhrases.push(phrase);
           }
           wordsAndPhrases.forEach(string => {
@@ -127,16 +130,7 @@ async function wikipediaQuery(searchQuery) {
     }
   }
 
-  console.log(sort.map(word => {
-    const score = dictionary[word].toString();
-    const decimalIndex = score.indexOf('.');
-    return `${word} = ${decimalIndex === -1 ? score : score.slice(0, decimalIndex + 3)}`;
-  }));
-
   console.timeEnd('time test');
 
   return sort;
 }
-
-console.clear();
-wikipediaQuery('jurassic park');

@@ -20,5 +20,6 @@ function replace() {
         });
     });
 }
+
 window.onload = replace;
 window.onscroll = replace;
