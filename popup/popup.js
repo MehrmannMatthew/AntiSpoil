@@ -1,8 +1,10 @@
 import MessageSystem from '../components/message-system.js';
 import Storage from '../components/storage.js';
 
-const messageSystem = new MessageSystem();
 const storage = new Storage();
+const messageSystem = new MessageSystem();
+
+messageSystem.addHandler('update-ui', update);
 
 function $(a, b) {
     return typeof b === 'number' ? document.querySelectorAll(a)[b] : document.querySelectorAll(a);
@@ -22,7 +24,8 @@ function createElement(parent, elementType, attributes, innerText) {
     return element;
 }
 
-function update() {
+async function update() {
+    await storage.loadFromBrowserStorage();
     const { phrases } = storage;
     const bannedListContainer = $('#banned-list-container', 0);
     bannedListContainer.innerHTML = '';
@@ -35,7 +38,8 @@ function update() {
 
         const keyPhraseContainer = createElement(itemContainer, 'div', { class: 'banned-phrase-container' });
         createElement(keyPhraseContainer, 'div', { class: 'banned-remove-button' }, 'delete').addEventListener('click', () => {
-            storage.removeKeyPhrase(keyPhrase);
+            storage.removeKeyPhrase(keyPhrase).then(update);
+            
         });
         createElement(keyPhraseContainer, 'div', { class: 'banned-phrase' }, keyPhrase);
         createElement(keyPhraseContainer, 'div', { class: 'banned-expansion-button' }, 'expand').addEventListener('click', () => {
@@ -82,4 +86,6 @@ window.onload = () => {
             inputButton();
         }
     });
+
+    update();
 };

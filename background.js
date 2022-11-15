@@ -1,12 +1,13 @@
 import MessageSystem from './components/message-system.js';
 import Storage from './components/storage.js';
 
-const messageSystem = new MessageSystem();
 const storage = new Storage();
+const messageSystem = new MessageSystem();
 
 messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
   const relatedPhrases = await wikipediaQuery(keyPhrase);
-  storage.add(keyPhrase, relatedPhrases);
+  await storage.add(keyPhrase, relatedPhrases);
+  messageSystem.send('update-ui');
 });
 
 async function safeFetch(url) {
