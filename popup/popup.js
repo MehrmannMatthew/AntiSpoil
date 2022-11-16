@@ -52,7 +52,7 @@ async function update() {
 
         const expansionPanel = createElement(itemContainer, 'div', { class: 'expansion-panel' });
         const expansionHeader = createElement(expansionPanel, 'div', { class: 'expansion-panel-header' });
-        createElement(expansionHeader, 'div', { class: 'expansion-panel-header-title' }, 'Block Related Words');
+        createElement(expansionHeader, 'div', { class: 'expansion-panel-header-title' }, 'Related Words');
         // expansion header toggle
         createElement(expansionHeader, 'div', { class: 'toggle' });
         

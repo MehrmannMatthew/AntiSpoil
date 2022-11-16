@@ -43,7 +43,8 @@ h1 {
 
 #add-phrase-container {
   display: flex;
-  margin: 0;
+  margin: 10px;
+  margin-left: 0;
   padding: 0;
   line-height: 12px;
 }
@@ -180,9 +181,15 @@ h1 {
 
 .expansion-panel {
   background-color: #efefef;
-  padding: 10px;
-  border-radius: 10px;
-  overflow: hidden;
+  padding: 18px;
+  border-radius: 5px;
+  /* overflow: hidden;*/
+
+  animation: fadeFromTop ease 0.75s;
+}
+
+.expansion-panel-header-title {
+  margin-bottom: -10px;
 }
 
 .expansion-panel-hidden .expansion-panel {
@@ -235,4 +242,15 @@ h1 {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
+}
+
+@keyframes fadeFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-900);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
