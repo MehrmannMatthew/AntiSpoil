@@ -36,7 +36,6 @@ async function update() {
     console.log(phrases);
     const bannedListContainer = $('#banned-list-container', 0);
     bannedListContainer.innerHTML = '';
-
     for(let i = 0; i < phrases.length; ++i) {
         const { keyPhrase, relatedPhrases } = phrases[i];
         
@@ -88,6 +87,8 @@ window.onload = async () => {
             }
         }
     });
+
+    $('#enable', 0).addEventListener("click", toggleOn);
 
     update();
 
