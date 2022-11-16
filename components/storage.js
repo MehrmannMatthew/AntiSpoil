@@ -42,7 +42,20 @@ class Storage {
         }
         await this.saveToBrowserStorage();
     }
-    
+    async removeRelatedPrase(keyPhrase, relatedPhrase) {
+        await this.loadFromBrowserStorage()
+        for(let i = 0; i< this.phrases.length; i++) {
+            const phrase = this.phrases[i];
+            if(keyPhrase === phrase.keyPhrase) {
+                const index = phrase.relatedPhrases.indexOf(relatedPhrase);
+                if(index !== -1) {
+                    phrase.relatedPhrases.splice(index, 1);
+                }
+                break;
+            }
+        }
+        await this.saveToBrowserStorage();
+    }
     loadFromBrowserStorage() {
         return new Promise(resolve => {
             extensionContext.storage.local.get(['phrases', 'settings'], ({ phrases, settings }) => {
