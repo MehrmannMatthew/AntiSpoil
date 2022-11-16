@@ -183,6 +183,8 @@ h1 {
 .expansion-panel {
   background-color: #efefef;
   padding: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
   /* overflow: hidden;*/
 
