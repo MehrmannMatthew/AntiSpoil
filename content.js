@@ -5,9 +5,16 @@ function replace() {
     const spoiler = "<h1 style=\"color:#FF0000\">[SPOILER]</h1>";
 
     chrome.storage.local.get(['phrases'], ({ phrases }) => {
-        console.log(phrases);
-        const modifiedBanned = phrases.map(phrase => phrase.toLowerCase().trim());
-        
+        const modifiedBanned = [];
+        let banIndex = 0;
+
+        for(let phraseObj of phrases){
+            modifiedBanned[banIndex++] = phraseObj.keyPhrase; //adds user-inputted keyphrase strings into our local array
+            for(let relatedPhrase of phraseObj.relatedPhrases){
+                modifiedBanned[banIndex++] = relatedPhrase; //adds algorithm-generated related phrases to our local array
+            }
+        }
+
         tags.forEach(tag => {
             const currentTag = document.getElementsByTagName(tag);
             for(const elt of currentTag) {
