@@ -42,6 +42,7 @@ class Storage {
         }
         await this.saveToBrowserStorage();
     }
+    
     loadFromBrowserStorage() {
         return new Promise(resolve => {
             extensionContext.storage.local.get(['phrases', 'settings'], ({ phrases, settings }) => {
