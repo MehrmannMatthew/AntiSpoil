@@ -26,7 +26,6 @@ function createElement(parent, elementType, attributes, innerText) {
 
 async function update() {
     const phrases = await storage.getPhrases();
-    console.log(phrases);
     const bannedListContainer = $('#banned-list-container', 0);
     bannedListContainer.innerHTML = '';
     for(let i = 0; i < phrases.length; ++i) {

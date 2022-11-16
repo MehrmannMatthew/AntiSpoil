@@ -6,7 +6,6 @@ const messageSystem = new MessageSystem();
 
 messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
   const relatedPhrases = await wikipediaQuery(keyPhrase);
-  console.log(relatedPhrases);
   for(let i = 0; i < relatedPhrases.length; ++i) {
     if(relatedPhrases[i] === undefined) {
       relatedPhrases.splice(i--, 1);
