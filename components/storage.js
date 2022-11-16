@@ -28,8 +28,19 @@ class Storage {
     }
     async add(keyPhrase, relatedPhrases) {
         await this.loadFromBrowserStorage();
-        this.phrases.push(new Phrase(keyPhrase, relatedPhrases));
-        console.log(this.phrases);
+        let i = 0;
+        while(i < this.phrases.length) {
+            if(this.phrases[i].keyPhrase === keyPhrase) {
+                this.phrases[i].relatedPhrases = relatedPhrases;
+                break;
+            }
+            else {
+                ++i;
+            }
+        }
+        if(i === this.phrases.length) {
+            this.phrases.push(new Phrase(keyPhrase, relatedPhrases));
+        }
         await this.saveToBrowserStorage();
     }
     async removeKeyPhrase(keyPhrase) {
@@ -37,6 +48,20 @@ class Storage {
         for(let i = 0; i < this.phrases.length; ++i) {
             if(keyPhrase === this.phrases[i].keyPhrase) {
                 this.phrases.splice(i, 1);
+                break;
+            }
+        }
+        await this.saveToBrowserStorage();
+    }
+    async removeRelatedPrase(keyPhrase, relatedPhrase) {
+        await this.loadFromBrowserStorage()
+        for(let i = 0; i< this.phrases.length; i++) {
+            const phrase = this.phrases[i];
+            if(keyPhrase === phrase.keyPhrase) {
+                const index = phrase.relatedPhrases.indexOf(relatedPhrase);
+                if(index !== -1) {
+                    phrase.relatedPhrases.splice(index, 1);
+                }
                 break;
             }
         }
