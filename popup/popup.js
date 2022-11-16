@@ -77,7 +77,7 @@ async function update() {
         relatedPhrases.forEach((phrase, relatedIndex) => {
             const relatedItemContainer = createElement(relatedListContainer, 'div', { class: 'banned-phrase-container' });
             createElement(relatedItemContainer, 'div', { class: 'banned-remove-button' }).addEventListener('click', () => {
-                storage.removeRelatedPrase(keyPhrase, phrase);
+                storage.removeRelatedPrase(keyPhrase, phrase).then(update);
             });
             createElement(relatedItemContainer, 'div', { class: 'banned-phrase' }, phrase);
         });
