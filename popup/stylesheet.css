@@ -2,7 +2,7 @@ html {
   margin: 0;
   padding: 0;
   width: 360px;
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', sans-serif
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', Ubuntu sans-serif;
 }
 body {
   margin: 0;
@@ -57,7 +57,7 @@ h1 {
   border-style: none;
   outline: 0;
   font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', sans-serif
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', Ubuntu sans-serif;
 }
 
 #add-phrase::placeholder {
