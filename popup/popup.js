@@ -6,18 +6,11 @@ const messageSystem = new MessageSystem();
 
 messageSystem.addHandler('update-ui', update);
 
+//Toggle function to handle icon and storage if toggle is on/off    
 function toggleOn(){
-    //const status = storage.toggleStorage...(something);
-    const toggle = document.getElementById('enable');
-    if(toggle.checked){
-        //assuming something like this to get it persistent:
-        //storage.toggleStorage(toggle).then(update);
-        chrome.action.setIcon({path: "../Icons/favicon-on-16x16.png"});
-        //also do stuff to block spoilers if it's 
-    }
-    else{
-        chrome.action.setIcon({path: "../Icons/favicon-16x16.png"});
-    }
+    const { checked } = document.getElementById('enable');
+    storage.setSetting('enabled', checked);
+    chrome.action.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
 }
 
 function $(a, b) {
@@ -50,12 +43,6 @@ async function update() {
     });
 
     bannedListContainer.innerHTML = '';
-
-    //check toggle
-    /*we'll see what this ends up being*/ 
-    //const toggle = document.getElementById("enable");
-    //var enabled = storage.getSetting()
-    toggleOn();
 
     for(let i = 0; i < phrases.length; ++i) {
         const { keyPhrase, relatedPhrases } = phrases[i];
@@ -97,23 +84,24 @@ async function update() {
     }
 }
 
-window.onload = () => {
-    const inputButton = () => {
-        const input = $('#add-phrase', 0);
-        const { value } = input;
-        if(value.length !== 0) {
-            messageSystem.send('add-phrase', { keyPhrase: value });
-            input.value = '';
-        }
-    };
-
+window.onload = async () => {
     $('#add-phrase', 0).addEventListener('keydown', e => {
         if(e.key == 'Enter') {
-            inputButton();
+            const input = $('#add-phrase', 0);
+            const { value } = input;
+            if(value.length !== 0) {
+                messageSystem.send('add-phrase', { keyPhrase: value });
+                input.value = '';
+            }
         }
     });
 
-    $('#enable', 0).addEventListener("click", toggleOn);
-
     update();
+
+    const toggleEnabled = $('#enable', 0);
+    const enabled = await storage.getSetting('enabled');
+    if(enabled) {
+        toggleEnabled.setAttribute('checked', 'true');
+    }
+    toggleEnabled.addEventListener("click", toggleOn);
 };
