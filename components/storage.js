@@ -10,33 +10,77 @@ class Phrase {
 class Storage {
     constructor() {
         this.phrases = [];
+        this.settings = {};
         this.loadFromBrowserStorage();
     }
-    add(keyPhrase, relatedPhrases) {
-        return new Promise(resolve => {
-            this.phrases.push(new Phrase(keyPhrase, relatedPhrases));
-            this.saveToBrowserStorage().then(resolve);
-        });
+    async getPhrases() {
+        await this.loadFromBrowserStorage();
+        return this.phrases;
     }
-    removeKeyPhrase(keyPhrase) {
-        return new Promise(resolve => {
-            for(let i = 0; i < this.phrases.length; ++i) {
-                if(keyPhrase === this.phrases[i].keyPhrase) {
-                    this.phrases.splice(i, 1);
-                    break;
-                }
+    async getSetting(setting) {
+        await this.loadFromBrowserStorage();
+        return this.settings[setting];
+    }
+    async setSetting(setting, value) {
+        await this.loadFromBrowserStorage();
+        this.settings[setting] = value;
+        await this.saveToBrowserStorage();
+    }
+    async add(keyPhrase, relatedPhrases) {
+        await this.loadFromBrowserStorage();
+        let i = 0;
+        while(i < this.phrases.length) {
+            if(this.phrases[i].keyPhrase === keyPhrase) {
+                this.phrases[i].relatedPhrases = relatedPhrases;
+                break;
             }
-            this.saveToBrowserStorage().then(resolve);
-        });
+            else {
+                ++i;
+            }
+        }
+        if(i === this.phrases.length) {
+            this.phrases.push(new Phrase(keyPhrase, relatedPhrases));
+        }
+        await this.saveToBrowserStorage();
+    }
+    async removeKeyPhrase(keyPhrase) {
+        await this.loadFromBrowserStorage()
+        for(let i = 0; i < this.phrases.length; ++i) {
+            if(keyPhrase === this.phrases[i].keyPhrase) {
+                this.phrases.splice(i, 1);
+                break;
+            }
+        }
+        await this.saveToBrowserStorage();
+    }
+    async removeRelatedPrase(keyPhrase, relatedPhrase) {
+        await this.loadFromBrowserStorage()
+        for(let i = 0; i< this.phrases.length; i++) {
+            const phrase = this.phrases[i];
+            if(keyPhrase === phrase.keyPhrase) {
+                const index = phrase.relatedPhrases.indexOf(relatedPhrase);
+                if(index !== -1) {
+                    phrase.relatedPhrases.splice(index, 1);
+                }
+                break;
+            }
+        }
+        await this.saveToBrowserStorage();
     }
     loadFromBrowserStorage() {
         return new Promise(resolve => {
-            extensionContext.storage.local.get(['phrases'], ({ phrases }) => {
+            extensionContext.storage.local.get(['phrases', 'settings'], ({ phrases, settings }) => {
                 if(Array.isArray(phrases)) {
                     this.phrases = phrases.map(({ keyPhrase, relatedPhrases }) => new Phrase(keyPhrase, relatedPhrases));
                 }
                 else {
                     this.phrases = [];
+                }
+                if(typeof settings === 'object') {
+                    this.settings = settings;
+                }
+                else {
+                    this.settings = {};
                 }
                 resolve();
             });
@@ -45,7 +89,10 @@ class Storage {
     saveToBrowserStorage() {
         return new Promise(resolve => {
             const phrases = this.phrases.map(({ keyPhrase, relatedPhrases }) => ({ keyPhrase, relatedPhrases }));
-            extensionContext.storage.local.set({ phrases }, resolve);
+            extensionContext.storage.local.set({ 
+                phrases: phrases,
+                settings: this.settings
+            }, resolve);
         });
     }
 }

@@ -1,0 +1,9 @@
+/* this file is what determines how the spoiled elements will look on the webpage, and allows them to show text on hover */
+
+.antispoil-blur{
+    color:transparent !important;
+    text-shadow: 0 0 11px rgba(0,0,0,0.5);
+}
+.antispoil-blur:hover{
+    color: black !important;
+}

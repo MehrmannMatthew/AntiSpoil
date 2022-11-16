@@ -1,24 +1,37 @@
 function replace() {
 
-    const tags = ["p", "span", "h", "h3", "a"];
+    chrome.storage.local.get(['phrases'], ({ phrases }) => {
+        const bannedPhrases = [];
+        let banIndex = 0;
 
-    const spoiler = "<h1 style=\"color:#FF0000\">[SPOILER]</h1>";
-
-    chrome.storage.local.get(['banned'], ({ banned }) => {
-
-        const modifiedBanned = banned.map(phrase => phrase.toLowerCase().trim());
+        //this loop adds all the phrases and related phrases from our data structure into a single array to more easily compare with web page content for blocking spoiler
+        for(let phraseObj of phrases){
+            bannedPhrases[banIndex++] = phraseObj.keyPhrase.toLowerCase(); //adds user-inputted keyphrase strings into our local array
+            for(let relatedPhrase of phraseObj.relatedPhrases){
+                bannedPhrases[banIndex++] = relatedPhrase.toLowerCase(); //adds algorithm-generated related phrases to our local array
+            }
+        }
         
-        tags.forEach(tag => {
-            const currentTag = document.getElementsByTagName(tag);
-            for(const elt of currentTag) {
-                modifiedBanned.forEach(phrase => {
-                    if(elt.innerHTML.toLowerCase().indexOf(phrase) !== -1) {
-                        elt.innerHTML = spoiler;
+        //this function searches through the webpage starting from the body, and hides all spoiler content
+        recursiveReplace(document.body, bannedPhrases);
+    });
+}
+
+function recursiveReplace(root, bannedPhrases) {
+    for(let i = 0; i < root.childNodes.length; ++i) {
+        const child = root.childNodes[i];
+        if(child.nodeType === Node.TEXT_NODE) {
+                const text = child.wholeText.toLowerCase();
+                bannedPhrases.forEach(bannedPhrase => {
+                    if(text.indexOf(bannedPhrase) !== -1) {
+                        root.classList.add('antispoil-blur');
                     }
                 });
-            }
-        });
-    });
+        }
+        else {
+            recursiveReplace(child, bannedPhrases);
+        }
+    }
 }
 
 window.onload = replace;
