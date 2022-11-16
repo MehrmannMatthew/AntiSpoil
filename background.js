@@ -5,6 +5,8 @@ const storage = new Storage();
 const messageSystem = new MessageSystem();
 
 messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
+  await storage.add(keyPhrase, []);
+  messageSystem.send('update-ui');
   const relatedPhrases = await wikipediaQuery(keyPhrase);
   for(let i = 0; i < relatedPhrases.length; ++i) {
     if(relatedPhrases[i] === undefined) {

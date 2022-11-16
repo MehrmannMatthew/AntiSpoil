@@ -27,11 +27,19 @@ function createElement(parent, elementType, attributes, innerText) {
 async function update() {
     const phrases = await storage.getPhrases();
     const bannedListContainer = $('#banned-list-container', 0);
+
+    const expandedKeyPhrases = [];
+    $('.banned-item-container').forEach(element => {
+        if(!element.classList.contains('expansion-panel-hidden')) {
+            expandedKeyPhrases.push(element.getAttribute('data-key-phrase'));
+        }
+    });
+
     bannedListContainer.innerHTML = '';
     for(let i = 0; i < phrases.length; ++i) {
         const { keyPhrase, relatedPhrases } = phrases[i];
         
-        const itemContainer = createElement(bannedListContainer, 'div', { id: `banned-item-container-${i}`, class: 'banned-item-container expansion-panel-hidden' });
+        const itemContainer = createElement(bannedListContainer, 'div', { 'data-key-phrase': keyPhrase, class: `banned-item-container ${ expandedKeyPhrases.indexOf(keyPhrase) === -1 ? 'expansion-panel-hidden' : '' }` });
 
         const keyPhraseContainer = createElement(itemContainer, 'div', { class: 'banned-phrase-container' });
         createElement(keyPhraseContainer, 'div', { class: 'banned-remove-button' }).addEventListener('click', () => {
