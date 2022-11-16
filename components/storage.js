@@ -29,7 +29,6 @@ class Storage {
     async add(keyPhrase, relatedPhrases) {
         await this.loadFromBrowserStorage();
         this.phrases.push(new Phrase(keyPhrase, relatedPhrases));
-        console.log(this.phrases);
         await this.saveToBrowserStorage();
     }
     async removeKeyPhrase(keyPhrase) {

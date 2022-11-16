@@ -6,6 +6,12 @@ const messageSystem = new MessageSystem();
 
 messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
   const relatedPhrases = await wikipediaQuery(keyPhrase);
+  console.log(relatedPhrases);
+  for(let i = 0; i < relatedPhrases.length; ++i) {
+    if(relatedPhrases[i] === undefined) {
+      relatedPhrases.splice(i--, 1);
+    }
+  }
   await storage.add(keyPhrase, relatedPhrases);
   messageSystem.send('update-ui');
 });
@@ -41,7 +47,6 @@ async function wikipediaAPI(params) {
 }
 
 async function wikipediaQuery(searchQuery) {
-  console.time('time test');
   // settings
   const maxWikipediaPages = 3;
   const relatedWordCount = 10;
@@ -130,8 +135,6 @@ async function wikipediaQuery(searchQuery) {
       }
     }
   }
-
-  console.timeEnd('time test');
 
   return sort;
 }
