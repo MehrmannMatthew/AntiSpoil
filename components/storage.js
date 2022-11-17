@@ -104,9 +104,6 @@ class Storage {
                             return false;
                         }
                     }
-                    phrases.forEach(({ keyPhrase, relatedPhrases }) => {
-                        
-                    });
                 }
             }
             else {

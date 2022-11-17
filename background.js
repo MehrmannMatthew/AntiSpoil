@@ -36,9 +36,9 @@ async function safeFetch(url) {
 }
 
 async function wikipediaAPI(params) {
-  /*
-    takes in params as argument, returns json of request
-  */
+  
+  // takes in params as argument, returns json of request
+  
   let url = 'https://en.wikipedia.org/w/api.php?';
   const combinedParams = {
     'format': 'json',

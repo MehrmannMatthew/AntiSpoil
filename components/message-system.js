@@ -1,4 +1,4 @@
-import extensionContext from './extension-context';
+import extensionContext from './extension-context.js';
 
 class MessageSystem {
   constructor() {
