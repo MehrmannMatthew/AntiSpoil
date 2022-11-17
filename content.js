@@ -1,7 +1,14 @@
 const className = 'anti-spoil-blur-1aa2e7f0be3cb32e13e5c84d42bb23c7';
 
+const extensionContext = chrome;
+extensionContext.runtime.onMessage.addListener(({ signature, body }) => {
+    if(signature == 'replace') {
+        replace();
+    }
+  });
+
 function replace() {
-    chrome.storage.local.get(['settings', 'phrases'], ({ settings, phrases }) => {
+    extensionContext.storage.local.get(['settings', 'phrases'], ({ settings, phrases }) => {
         if(settings.enabled) {
             const bannedPhrases = [];
 

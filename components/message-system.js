@@ -19,6 +19,17 @@ class MessageSystem {
       body
     });
   }
+  sendTabs(signature, body){
+    extensionContext.tabs.query({}, function(tabs) {
+      for(const tab of tabs){
+        console.log(tab);
+        extensionContext.tabs.sendMessage(tab.id, {
+          signature,
+          body
+        });
+      }
+    });
+  }
 }
 
 export default MessageSystem;

@@ -33,6 +33,7 @@ function createElement(parent, elementType, attributes, innerText) {
 }
 
 async function update() {
+    messageSystem.sendTabs('replace');
     const phrases = await storage.getPhrases();
     const bannedListContainer = $('#banned-list-container', 0);
 
