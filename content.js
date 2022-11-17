@@ -1,6 +1,3 @@
-import MessageSystem from './components/message-system.js';
-import Storage from './components/storage.js';
-
 function replace() {
 
     chrome.storage.local.get(['phrases'], ({ phrases }) => {
@@ -37,13 +34,13 @@ function recursiveReplace(root, bannedPhrases) {
     }
 }
 
-window.onload = async () => {
-    if( await Storage.getSetting('enabled') ){
+window.onload =  {
+    if( chrome.storage.local.get(settings) ){
         replace;
     }   
 };
-window.onscroll = async () => {
-    if( await Storage.getSetting('enabled') ){
+window.onscroll =  {
+    if( chrome.storage.local.get(settings) ){
         replace;
     }   
 };
