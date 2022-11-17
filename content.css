@@ -3,6 +3,7 @@
 .antispoil-blur{
     color:transparent !important;
     text-shadow: 0 0 11px rgba(0,0,0,0.5);
+    transition: color 200ms ease-in-out;
 }
 .antispoil-blur:hover{
     color: black !important;
