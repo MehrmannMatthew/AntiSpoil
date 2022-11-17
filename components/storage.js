@@ -70,21 +70,53 @@ class Storage {
     loadFromBrowserStorage() {
         return new Promise(resolve => {
             extensionContext.storage.local.get(['phrases', 'settings'], ({ phrases, settings }) => {
-                if(Array.isArray(phrases)) {
+                // check the types of the values returned.
+                if(this.validateStorageData(phrases, settings)) {
                     this.phrases = phrases.map(({ keyPhrase, relatedPhrases }) => new Phrase(keyPhrase, relatedPhrases));
-                }
-                else {
-                    this.phrases = [];
-                }
-                if(typeof settings === 'object') {
                     this.settings = settings;
                 }
                 else {
+                    this.phrases = [];
                     this.settings = {};
                 }
                 resolve();
             });
         });
+    }
+    validateStorageData(phrases, settings) {
+        try {
+            if(typeof settings === 'object' && Array.isArray(phrases)) {
+                if(phrases.length === 0) {
+                    return true;
+                }
+                else {
+                    for(let i = 0; i < phrases.length; ++i) {
+                        const { keyPhrase, relatedPhrases } = phrases[i];
+                        if(typeof keyPhrase === 'string' && Array.isArray(relatedPhrases)) {
+                            for(let j = 0; j < relatedPhrases.length; ++j) {
+                                if(typeof relatedPhrases[j] !== 'string') {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    phrases.forEach(({ keyPhrase, relatedPhrases }) => {
+                        
+                    });
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        catch(err) {
+            console.warn(err);
+        }
+        return false;
     }
     saveToBrowserStorage() {
         return new Promise(resolve => {

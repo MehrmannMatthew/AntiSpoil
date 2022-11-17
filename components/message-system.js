@@ -1,7 +1,9 @@
+import extensionContext from './extension-context';
+
 class MessageSystem {
   constructor() {
     this.handlers = {};
-    chrome.runtime.onMessage.addListener(({ signature, body }, sender) => {
+    extensionContext.runtime.onMessage.addListener(({ signature, body }, sender) => {
       const handler = this.handlers[signature];
       if(handler) {
         handler(body);
@@ -12,7 +14,7 @@ class MessageSystem {
     this.handlers[signature] = handler;
   }
   send(signature, body) {
-    chrome.runtime.sendMessage({
+    extensionContext.runtime.sendMessage({
       signature,
       body
     });
