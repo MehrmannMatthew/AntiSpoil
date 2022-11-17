@@ -6,25 +6,28 @@
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "js": ["content.js"]
+            "css": ["content.css"],
+            "js": ["content.js"],
+            "run_at": "document_idle"
         }
     ],
     "action": {
         "default_icon": {
-            "16": "Icons/favicon-16x16.png",
-            "32": "Icons/favicon-32x32.png"
+            "16": "icons/favicon-16x16.png",
+            "32": "icons/favicon-32x32.png"
         },
         "default_title": "AntiSpoil",
         "default_popup": "popup/index.html"
     },
     "icons": {
-        "16": "Icons/favicon-16x16.png",
-        "32": "Icons/favicon-32x32.png",
-        "48": "Icons/spoil48x48.png",
-        "128": "Icons/spoil128x128.png"
+        "16": "icons/favicon-16x16.png",
+        "32": "icons/favicon-32x32.png",
+        "48": "icons/spoil48x48.png",
+        "128": "icons/spoil128x128.png"
         },
     "background": {
-            "service_worker": "background.js"   
+            "service_worker": "background.js",
+            "type": "module"
         },
 
     "permissions": [

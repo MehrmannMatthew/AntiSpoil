@@ -2,7 +2,7 @@ html {
   margin: 0;
   padding: 0;
   width: 360px;
-  font-family: Roboto, Helvetica, Arial;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', Ubuntu sans-serif;
 }
 body {
   margin: 0;
@@ -43,7 +43,8 @@ h1 {
 
 #add-phrase-container {
   display: flex;
-  margin: 0;
+  margin: 10px;
+  margin-left: 0;
   padding: 0;
   line-height: 12px;
 }
@@ -56,6 +57,7 @@ h1 {
   border-style: none;
   outline: 0;
   font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', Ubuntu sans-serif;
 }
 
 #add-phrase::placeholder {
@@ -82,51 +84,118 @@ h1 {
 .banned-phrase-container {
   display: flex;
   flex-direction: row;
-  margin: 0;
   justify-content: left;
+  margin: 0;
   padding: 0;
+  height: 24px;
+  line-height: 24px;
 }
 
-.banned-phrase {
-  margin-left: 5px;
-  margin-right: 5px;
+.banned-phrase-container div {
+  flex-grow: 1;
+  margin: 0;
   padding: 0;
-  width: 100%;
+  line-height: 24px;
+  height: 24px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.banned-expansion-button {
-  margin-left: 5px;
-  color: #777777;
-  font-weight:lighter;
+.banned-phrase-container .banned-phrase {
+  position: relative;
+  left: -6px;
 }
-.banned-expansion-button:hover {
-  text-shadow: 2px 2px 10px #444444;
-  font-size:larger;
-  cursor: pointer;
+
+.banned-expansion-button, .banned-remove-button {
+  max-width: 24px;
 }
+
 
 .banned-remove-button {
-  color: #777777;
-  font-weight:lighter;
+  position: relative;
+  left: -6px;
 }
-.banned-remove-button:hover {
-  text-shadow: 2px 2px 10px #444444;
-  font-size:larger;
+.banned-remove-button:hover, .banned-expansion-button:hover {
   cursor: pointer;
 
 }
 
-.banned-phrase {
+.banned-remove-button::before, .banned-remove-button::after {
+  content: '';
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+  width: 2px;
+  height: 14px;
+  background-color: #c8c8c8;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+.banned-remove-button:hover::before, .banned-remove-button:hover::after {
+  background-color: #ff5b5b;
+}
+.banned-remove-button::before {
+  top: 6px;
+  left: 11px;
+  transform: rotate(45deg);
+}
+.banned-remove-button::after {
+  top: -8px;
+  left: 11px;
+  transform: rotate(-45deg);
+}
 
+.banned-expansion-button::before, .banned-expansion-button::after {
+  content: '';
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+  width: 2px;
+  height: 10px;
+  background-color: #c8c8c8;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+.banned-expansion-button:hover::before, .banned-expansion-button:hover::after {
+  background-color: #ff5b5b;
+}
+.banned-expansion-button::before {
+  top: 8px;
+  left: 8px;
+  transform: rotate(45deg);
+}
+.banned-expansion-button::after {
+  top: -2px;
+  left: 14px;
+  transform: rotate(-45deg);
+}
+.expansion-panel-hidden .banned-expansion-button::before {
+  transform: rotate(-45deg);
+}
+.expansion-panel-hidden .banned-expansion-button::after {
+  transform: rotate(45deg);
 }
 
 .expansion-panel {
-  background-color: #C8C8C8;
-  padding:10px;
-  border-radius: 10px;
+  background-color: #efefef;
+  padding: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  /* overflow: hidden;*/
+
+  animation: fadeFromTop ease 0.75s;
 }
 
-.expansion-panel-hidden {
+.expansion-panel-header-title {
+  margin-bottom: -10px;
+}
+
+.expansion-panel-hidden .expansion-panel {
   display: none;
 }
 
@@ -176,4 +245,15 @@ h1 {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
+}
+
+@keyframes fadeFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-900);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
