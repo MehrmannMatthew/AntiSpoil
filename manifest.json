@@ -13,8 +13,8 @@
     ],
     "action": {
         "default_icon": {
-            "16": "icons/favicon-16x16.png",
-            "32": "icons/favicon-32x32.png"
+            "16": "icons/favicon-on-16x16.png",
+            "32": "icons/favicon-on-32x32.png"
         },
         "default_title": "AntiSpoil",
         "default_popup": "popup/index.html"
