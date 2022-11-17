@@ -1,19 +1,20 @@
 function replace() {
+    chrome.storage.local.get(['settings', 'phrases'], ({ settings, phrases }) => {
+        if(settings.enabled) {
+            const bannedPhrases = [];
+            let banIndex = 0;
 
-    chrome.storage.local.get(['phrases'], ({ phrases }) => {
-        const bannedPhrases = [];
-        let banIndex = 0;
-
-        //this loop adds all the phrases and related phrases from our data structure into a single array to more easily compare with web page content for blocking spoiler
-        for(let phraseObj of phrases){
-            bannedPhrases[banIndex++] = phraseObj.keyPhrase.toLowerCase(); //adds user-inputted keyphrase strings into our local array
-            for(let relatedPhrase of phraseObj.relatedPhrases){
-                bannedPhrases[banIndex++] = relatedPhrase.toLowerCase(); //adds algorithm-generated related phrases to our local array
+            //this loop adds all the phrases and related phrases from our data structure into a single array to more easily compare with web page content for blocking spoiler
+            for(let phraseObj of phrases){
+                bannedPhrases[banIndex++] = phraseObj.keyPhrase.toLowerCase(); //adds user-inputted keyphrase strings into our local array
+                for(let relatedPhrase of phraseObj.relatedPhrases){
+                    bannedPhrases[banIndex++] = relatedPhrase.toLowerCase(); //adds algorithm-generated related phrases to our local array
+                }
             }
+            
+            //this function searches through the webpage starting from the body, and hides all spoiler content
+            recursiveReplace(document.body, bannedPhrases);
         }
-        
-        //this function searches through the webpage starting from the body, and hides all spoiler content
-        recursiveReplace(document.body, bannedPhrases);
     });
 }
 
@@ -34,13 +35,5 @@ function recursiveReplace(root, bannedPhrases) {
     }
 }
 
-window.onload =  {
-    if( chrome.storage.local.get(settings) ){
-        replace;
-    }   
-};
-window.onscroll =  {
-    if( chrome.storage.local.get(settings) ){
-        replace;
-    }   
-};
+window.onload =  replace;
+window.onscroll =  replace;

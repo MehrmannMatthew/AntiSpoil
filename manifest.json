@@ -3,7 +3,6 @@
     "name": "AntiSpoil",
     "description": "Blocks potential spoiler for Movies, TV Shows, and other media",
     "version": "1.0.0",
-    "default_locale": "en",
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
