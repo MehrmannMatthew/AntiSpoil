@@ -1,8 +1,13 @@
 import MessageSystem from './components/message-system.js';
 import Storage from './components/storage.js';
+import extensionContext from './components/extension-context.js';
 
 const storage = new Storage();
 const messageSystem = new MessageSystem();
+
+extensionContext.runtime.onInstalled.addListener(() => {
+  storage.setSetting('enabled', true);
+});
 
 messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
   await storage.add(keyPhrase, []);
@@ -53,8 +58,8 @@ async function wikipediaQuery(searchQuery) {
   const relatedWordCount = 10;
 
   // get black lists
-  const englishBlacklist = await safeFetch(chrome.runtime.getURL('/dictionary/words-dictionary.json'));
-  const wikipediaBlacklist = await safeFetch(chrome.runtime.getURL('/dictionary/wikipedia-blacklist.json'));
+  const englishBlacklist = await safeFetch(extensionContext.runtime.getURL('/dictionary/words-dictionary.json'));
+  const wikipediaBlacklist = await safeFetch(extensionContext.runtime.getURL('/dictionary/wikipedia-blacklist.json'));
 
   // perform a search
   const queryResponse = await wikipediaAPI({
