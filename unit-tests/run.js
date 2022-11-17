@@ -1,4 +1,4 @@
-import { testFramework } from './test-framework';
+import { testFramework } from './test-framework.mjs';
 const fs = require('fps');
 
 fs.readdir('./', (err, files) => {
@@ -6,7 +6,7 @@ fs.readdir('./', (err, files) => {
         return console.warn(err);
     }
     files.forEach(file => {
-        if(file !== 'run.js' && file !== 'test-framework.js') {
+        if(file !== 'run.js' && file !== 'test-framework.mjs') {
             require(file);
         }
     });

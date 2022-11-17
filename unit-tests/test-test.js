@@ -1,4 +1,4 @@
-import { expect, test } from './test-framework';
+import { expect, test } from './test-framework.mjs';
 
 test(() => {
     expect('test' === 'test');
