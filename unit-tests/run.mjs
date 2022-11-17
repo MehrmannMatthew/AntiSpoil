@@ -1,15 +1,17 @@
 import { testFramework } from './test-framework.mjs';
-const fs = require('fps');
+import fs from 'fs';
 
-fs.readdir('./', (err, files) => {
+fs.readdir('./unit-tests/', (err, files) => {
     if(err) {
         return console.warn(err);
     }
+    const promises = [];
     files.forEach(file => {
-        if(file !== 'run.js' && file !== 'test-framework.mjs') {
-            require(file);
+        if(file !== 'run.mjs' && file !== 'test-framework.mjs') {
+            promises.push(import(`./${file}`));
         }
     });
-    
-    await testFramework.runTests();
+    Promise.all(promises).then(() => {
+        testFramework.runTests();
+    });
 });

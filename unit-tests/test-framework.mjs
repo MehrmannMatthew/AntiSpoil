@@ -19,9 +19,10 @@ class TestFramework {
 
                 return new Promise(resolve => {
                     try {
-                        await callback();
-                        results[index] = `[PASSED] - ${description}`;
-                        resolve();
+                        callback().then(() => {
+                            results[index] = `[PASSED] - ${description}`;
+                            resolve();
+                        });
                     }
                     catch(err) {
                         if(err === 'test-framework-expect-failed') {
@@ -30,7 +31,7 @@ class TestFramework {
                         else {
                             results[index] = `[FAILED] - ${description}: ${err}`;
                         }
-                        console.error(err);
+                        resolve();
                     }
                 });
             });
@@ -53,4 +54,6 @@ export function expect(statement) {
     }
 }
 
-export const test = testFramework.addTest(description, callback);
+export function test(description, callback) {
+    testFramework.addTest(description, callback);
+}
