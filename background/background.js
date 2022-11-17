@@ -1,8 +1,8 @@
-import MessageSystem from './components/message-system.js';
-import Storage from './components/storage.js';
-import extensionContext from './components/extension-context.js';
-import wikipediaAPI from './components/wikipedia-api.js';
-import safeFetch from './components/safe-fetch.js';
+import MessageSystem from '../components/message-system.js';
+import Storage from '../components/storage.js';
+import extensionContext from '../components/extension-context.js';
+import wikipediaAPI from '../components/wikipedia-api.js';
+import safeFetch from '../components/safe-fetch.js';
 
 const storage = new Storage();
 const messageSystem = new MessageSystem();

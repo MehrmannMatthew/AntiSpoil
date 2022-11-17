@@ -11,7 +11,7 @@ messageSystem.addHandler('update-ui', update);
 function toggleOn(){
     const { checked } = document.getElementById('enable');
     storage.setSetting('enabled', checked);
-    extensionContext.action.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
+    extensionContext.browserAction.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
 }
 
 function $(a, b) {
