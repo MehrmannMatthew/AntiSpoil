@@ -1,6 +1,8 @@
 import MessageSystem from './components/message-system.js';
 import Storage from './components/storage.js';
 import extensionContext from './components/extension-context.js';
+import wikipediaAPI from './components/wikipedia-api.js';
+import safeFetch from './components/safe-fetch.js';
 
 const storage = new Storage();
 const messageSystem = new MessageSystem();
@@ -21,36 +23,6 @@ messageSystem.addHandler('add-phrase', async ({ keyPhrase }) => {
   await storage.add(keyPhrase, relatedPhrases);
   messageSystem.send('update-ui');
 });
-
-async function safeFetch(url) {
-  try {
-    const response = await fetch(url);
-    if(!response.ok) {
-      throw new Error(response.statusText);
-    }
-    return response.json();
-  }
-  catch(err) {
-    throw new Error(err);
-  }
-}
-
-async function wikipediaAPI(params) {
-  
-  // takes in params as argument, returns json of request
-  
-  let url = 'https://en.wikipedia.org/w/api.php?';
-  const combinedParams = {
-    'format': 'json',
-    'utf8': '',
-    'origin': '*',
-    ...params
-  };
-  for(const paramKey in combinedParams) {
-    url += `${paramKey}=${combinedParams[paramKey]}&`;
-  }
-  return safeFetch(url);
-}
 
 async function wikipediaQuery(searchQuery) {
   // settings
