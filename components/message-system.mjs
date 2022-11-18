@@ -1,9 +1,9 @@
-import extensionContext from './extension-context.js';
+import extensionContext from './extension-context.mjs';
 
 class MessageSystem {
   constructor() {
     this.handlers = {};
-    extensionContext.runtime.onMessage.addListener(({ signature, body }, sender) => {
+    extensionContext.runtime.onMessage.addListener(({ signature, body }) => {
       const handler = this.handlers[signature];
       if(handler) {
         handler(body);

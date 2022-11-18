@@ -1,6 +1,6 @@
-import MessageSystem from '../components/message-system.js';
-import Storage from '../components/storage.js';
-import extensionContext from '../components/extension-context.js';
+import MessageSystem from '../components/message-system.mjs';
+import Storage from '../components/storage.mjs';
+import extensionContext from '../components/extension-context.mjs';
 
 const storage = new Storage();
 const messageSystem = new MessageSystem();

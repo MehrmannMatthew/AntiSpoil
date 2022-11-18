@@ -1,4 +1,4 @@
-import safeFetch from './safe-fetch.js';
+import safeFetch from './safe-fetch.mjs';
 
 async function wikipediaAPI(params) {
   

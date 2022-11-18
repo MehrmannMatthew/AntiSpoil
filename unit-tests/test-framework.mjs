@@ -13,6 +13,7 @@ class Test {
 class TestFramework {
     constructor() {
         this.tests = [];
+        this.lastMockArguments = [];
     }
     addTest(description, callback) {
         this.tests.push(new Test(description, callback));
@@ -54,4 +55,13 @@ export function expect(statement) {
 
 export function test(description, callback) {
     testFramework.addTest(description, callback);
+}
+
+export function mock(...args) {
+    if(args.length !== 0) {
+        testFramework.lastMockArguments = args;
+    }
+    return {
+        getArguments: () => testFramework.lastMockArguments
+    };
 }

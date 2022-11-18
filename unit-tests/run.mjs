@@ -6,9 +6,10 @@ fs.readdir('./unit-tests/tests/', (err, files) => {
         return console.warn(err);
     }
     const promises = [];
-    files.forEach(file => {
-        if(file !== 'run.mjs' && file !== 'test-framework.mjs') {
-            promises.push(import(`./tests/${file}`));
+    files.forEach(fileName => {
+        if(fileName !== 'run.mjs' && fileName !== 'test-framework.mjs') {
+            console.log(fileName);
+            promises.push(import(`./tests/${fileName}`));
         }
     });
     Promise.all(promises).then(() => {
