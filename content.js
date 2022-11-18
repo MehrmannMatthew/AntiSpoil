@@ -1,5 +1,5 @@
 const className = 'anti-spoil-blur-1aa2e7f0be3cb32e13e5c84d42bb23c7';
-const extensionContext = (window.browser)? window.browser : window.chrome;
+const extensionContext = (browser)? browser : chrome;
 
 function replace() {
     extensionContext.storage.local.get(['settings', 'phrases'], ({ settings, phrases }) => {
