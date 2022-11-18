@@ -12,7 +12,7 @@ EECS 448 Project Repo for AntiSpoil Extension
 
 ### Installation
 
-####Chrome
+#### Chrome
 1. Download the zip of this project code
 2. Extract the zip 
 3. Navigate to `chrome://extensions`
@@ -20,7 +20,7 @@ EECS 448 Project Repo for AntiSpoil Extension
 5. Click load unpacked
 6. Select the extracted root folder of this project
 
-####Firefox
+#### Firefox
 1. Download zip of code from firefox-port branch
 2. Extract zip 
 3. Open Firefox and go to `about:debugging#/runtime/this-firefox`
