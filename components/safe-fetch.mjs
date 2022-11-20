@@ -7,7 +7,8 @@ async function safeFetch(url) {
       return response.json();
     }
     catch(err) {
-      throw new Error(err);
+      console.warn(err);
+      return {};
     }
   }
 

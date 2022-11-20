@@ -1,6 +1,6 @@
-import MessageSystem from '../components/message-system.js';
-import Storage from '../components/storage.js';
-import extensionContext from '../components/extension-context.js';
+import MessageSystem from '../components/message-system.mjs';
+import Storage from '../components/storage.mjs';
+import extensionContext from '../components/extension-context.mjs';
 
 const storage = new Storage();
 const messageSystem = new MessageSystem();
@@ -11,7 +11,7 @@ messageSystem.addHandler('update-ui', update);
 function toggleOn(){
     const { checked } = document.getElementById('enable');
     storage.setSetting('enabled', checked);
-    extensionContext.action.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
+    extensionContext.browserAction.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
 }
 
 function $(a, b) {

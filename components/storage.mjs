@@ -1,4 +1,4 @@
-import extensionContext from './extension-context.js';
+import extensionContext from './extension-context.mjs';
 
 class Phrase {
     constructor(keyPhrase, relatedPhrases) {
@@ -70,22 +70,26 @@ class Storage {
     loadFromBrowserStorage() {
         return new Promise(resolve => {
             extensionContext.storage.local.get(['phrases', 'settings'], ({ phrases, settings }) => {
-                // check the types of the values returned.
-                if(this.validateStorageData(phrases, settings)) {
+                // validate phrases object
+                if(this.validateStorageData(phrases)) {
                     this.phrases = phrases.map(({ keyPhrase, relatedPhrases }) => new Phrase(keyPhrase, relatedPhrases));
-                    this.settings = settings;
                 }
                 else {
                     this.phrases = [];
+                }
+                if(typeof settings === 'object') {
+                    this.settings = settings;
+                }
+                else {
                     this.settings = {};
                 }
                 resolve();
             });
         });
     }
-    validateStorageData(phrases, settings) {
+    validateStorageData(phrases) {
         try {
-            if(typeof settings === 'object' && Array.isArray(phrases)) {
+            if(Array.isArray(phrases)) {
                 if(phrases.length === 0) {
                     return true;
                 }
