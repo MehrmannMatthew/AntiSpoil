@@ -1,10 +1,9 @@
 /* this file is what determines how the spoiled elements will look on the webpage, and allows them to show text on hover */
 
 .anti-spoil-blur-1aa2e7f0be3cb32e13e5c84d42bb23c7 {
-    color:transparent !important;
-    text-shadow: 0 0 11px rgba(0,0,0,0.5);
-    transition: color 200ms ease-in-out;
+    filter: blur(6px) !important;
+    transition: 200ms ease-in-out;
 }
 .anti-spoil-blur-1aa2e7f0be3cb32e13e5c84d42bb23c7:hover {
-    color: black !important;
+    filter: inherit !important;
 }

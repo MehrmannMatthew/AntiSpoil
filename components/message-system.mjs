@@ -21,12 +21,18 @@ class MessageSystem {
   }
   sendTabs(signature, body){
     extensionContext.tabs.query({}, function(tabs) {
-      for(const tab of tabs){
-        console.log(tab);
-        extensionContext.tabs.sendMessage(tab.id, {
-          signature,
-          body
-        });
+      for(const tab of tabs) {
+        try {
+          if(typeof tab.id === 'number') {
+            extensionContext.tabs.sendMessage(tab.id, {
+              signature,
+              body
+            });
+          }
+        }
+        catch(err) {
+          console.warn(err);
+        }
       }
     });
   }

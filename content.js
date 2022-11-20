@@ -1,8 +1,8 @@
 const className = 'anti-spoil-blur-1aa2e7f0be3cb32e13e5c84d42bb23c7';
 
 const extensionContext = chrome;
-extensionContext.runtime.onMessage.addListener(({ signature, body }) => {
-    if(signature == 'replace') {
+extensionContext.runtime.onMessage.addListener(({ signature }) => {
+    if(signature === 'replace') {
         replace();
     }
   });
@@ -23,10 +23,10 @@ function replace() {
             //this function searches through the webpage starting from the body, and hides all spoiler content
             recursiveReplace(document.body, bannedPhrases);
         }
-        else {
+        else { // remove all blur
             const elements = document.getElementsByClassName(className);
-            for(let i = 0; i < elements.length; ++i) {
-                elements[i].classList.remove(className);
+            while(elements.length !== 0) {
+                elements[0].classList.remove(className);
             }
         }
     });

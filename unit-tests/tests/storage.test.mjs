@@ -8,7 +8,6 @@ const internalBrowserMockedStorage = {};
 extensionContext.storage = {
     local: {
         set: async (setObject, resolveCallback) => {
-            console.log(setObject);
             for(const key in setObject) {
                 internalBrowserMockedStorage[key] = setObject[key];
             }
@@ -46,11 +45,7 @@ test('Storage - setSetting() should set a setting and getSetting() should return
     const settingValue = 'value';
 
     await storage.setSetting(settingKey, settingValue);
-    console.log(internalBrowserMockedStorage);
     const value = await storage.getSetting(settingKey);
-
-    console.log('value');
-    console.log(value);
 
     expect(value === settingValue);
 });

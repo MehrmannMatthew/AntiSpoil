@@ -8,10 +8,12 @@ const messageSystem = new MessageSystem();
 messageSystem.addHandler('update-ui', update);
 
 //Toggle function to handle icon and storage if toggle is on/off    
-function toggleOn(){
+async function toggleOn() {
     const { checked } = document.getElementById('enable');
-    storage.setSetting('enabled', checked);
     extensionContext.browserAction.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
+    await storage.setSetting('enabled', checked);
+    messageSystem.sendTabs('replace');
+
 }
 
 function $(a, b) {
