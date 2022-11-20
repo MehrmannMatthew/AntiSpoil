@@ -71,8 +71,15 @@ async function wikipediaQuery(searchQuery) {
           if(wordsAndPhrases.length !== 1) {
             wordsAndPhrases.push(phrase);
           }
-          wordsAndPhrases.forEach(string => {
-            if(string.length > 2 && wikipediaBlacklist[string] === undefined && englishBlacklist[string] === undefined) {
+          let insertionCount = 0;
+          wordsAndPhrases.forEach((string, index) => {
+            if(
+              string.length > 2 &&
+              (index + 1 !== wordsAndPhrases.length || (wordsAndPhrases.length !== 1 && insertionCount !== 0)) &&
+              wikipediaBlacklist[string] === undefined &&
+              englishBlacklist[string] === undefined
+            ) {
+              insertionCount += 1;
               if(dictionary[string] === undefined) {
                 dictionary[string] = weight; // set word count to 1
               }
