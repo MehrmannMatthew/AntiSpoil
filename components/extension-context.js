@@ -1,4 +1,4 @@
-const extensionContext = (browser)? browser : chrome;
+const extensionContext = ((chrome)? chrome : browser);
 
 // use this for multi browser support
 
