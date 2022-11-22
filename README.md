@@ -12,7 +12,7 @@ EECS 448 Project Repo for AntiSpoil Extension
 
 ### Installation
 
-#### Chrome
+#### Chrome / Edge
 1. Download the zip of this project code
 2. Extract the zip 
 3. Navigate to `chrome://extensions`
@@ -21,7 +21,7 @@ EECS 448 Project Repo for AntiSpoil Extension
 6. Select the extracted root folder of this project
 
 #### Firefox
-1. Download zip of code from firefox-port branch
+1. Download the zip of this project code
 2. Extract zip 
 3. Open Firefox and go to `about:debugging#/runtime/this-firefox`
 4. Click "Load Temporary Add-on...", navigate to the extracted code folder, and select the `manifest.json` file; then click "Open."
