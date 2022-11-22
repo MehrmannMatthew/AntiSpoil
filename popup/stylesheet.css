@@ -1,12 +1,12 @@
 html {
   margin: 0;
   padding: 0;
-  width: 360px;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', 'Segoe UI', Ubuntu sans-serif;
 }
 body {
   margin: 0;
   padding: 28px;
+  width: 311.5px;
   background-color: #ffffff;
   overflow: scroll;
 }

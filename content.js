@@ -1,6 +1,6 @@
 const className = 'anti-spoil-blur-1aa2e7f0be3cb32e13e5c84d42bb23c7';
+const extensionContext = (chrome ? chrome : browser);
 
-const extensionContext = chrome;
 extensionContext.runtime.onMessage.addListener(({ signature }) => {
     if(signature === 'replace') {
         replace();
