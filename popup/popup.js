@@ -13,7 +13,6 @@ async function toggleOn() {
     extensionContext.browserAction.setIcon({path: checked ? "../Icons/favicon-on-16x16.png" : "../Icons/favicon-16x16.png" });
     await storage.setSetting('enabled', checked);
     messageSystem.sendTabs('replace');
-
 }
 
 function $(a, b) {
@@ -35,7 +34,6 @@ function createElement(parent, elementType, attributes, innerText) {
 }
 
 async function update() {
-    messageSystem.sendTabs('replace');
     const phrases = await storage.getPhrases();
     const bannedListContainer = $('#banned-list-container', 0);
 
@@ -86,6 +84,7 @@ async function update() {
             createElement(relatedItemContainer, 'div', { class: 'banned-phrase' }, phrase);
         });
     }
+    messageSystem.sendTabs('replace');
 }
 
 window.onload = async () => {

@@ -11,6 +11,4 @@ const getExtensionContext = () => {
 
 const extensionContext = getExtensionContext();
 
-// use this for multi browser support
-
 export default extensionContext;
