@@ -8,8 +8,6 @@ extensionContext.runtime.onMessage.addListener(({ signature }) => {
     }
 });
 
-console.log('bruh');
-
 function generatePRC() {
     return `anti-spoil-blur-prc-${new Date().getTime()}`;
 }
@@ -32,7 +30,6 @@ function replace() {
                     bannedPhrases.push(relatedPhrase.toLowerCase()); //adds algorithm-generated related phrases to our local array
                 }
             }
-            console.log(bannedPhrases);
             //this function searches through the webpage starting from the body, and hides all spoiler content
             recursiveReplace(document.body, bannedPhrases, previousReplaceClass);
         }
